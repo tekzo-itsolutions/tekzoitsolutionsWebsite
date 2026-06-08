@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#000"/>
+  <polygon points="300,100 380,280 220,280" fill="none" stroke="#C0C0C0" stroke-width="4"/>
+  <circle cx="300" cy="200" r="40" fill="#C0C0C0"/>
+  <text x="300" y="340" text-anchor="middle" fill="#FFF" font-family="Arial" font-size="24" font-weight="bold">APEX</text>
+  <text x="300" y="375" text-anchor="middle" fill="#C0C0C0" font-family="Arial" font-size="16">Logo Design</text>
+</svg>

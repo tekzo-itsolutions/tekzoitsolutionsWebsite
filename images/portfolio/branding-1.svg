@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#1A1A1A"/>
+  <rect x="80" y="80" width="180" height="240" rx="4" fill="#000" stroke="#C0C0C0"/>
+  <rect x="340" y="80" width="180" height="100" rx="4" fill="#333"/>
+  <rect x="340" y="220" width="180" height="100" rx="4" fill="#C0C0C0"/>
+  <text x="300" y="370" text-anchor="middle" fill="#C0C0C0" font-family="Arial" font-size="18">Brand Identity Kit</text>
+</svg>
