@@ -12,7 +12,7 @@
 window.TEKZO_CONTACT = {
   method: 'formsubmit',
 
-  recipientEmail: 'info@tekzoitsolutions.com',
+  recipientEmail: 'tektoitsolutions@gmail.com',
 
   emailjs: {
     publicKey: '',
