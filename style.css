@@ -2229,6 +2229,10 @@ ul {
 @media (max-width: 768px) {
   .hamburger { display: flex; }
 
+  .logo img {
+    height: 76px;
+  }
+
   .nav-menu {
     position: fixed;
     top: 0;
@@ -2265,24 +2269,95 @@ ul {
   .strategy-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+  .hero {
+    align-items: flex-start;
+    padding: calc(var(--header-height) + 44px) 0 64px;
+  }
+  .hero-layout {
+    gap: 34px;
+  }
+  .hero-content {
+    text-align: left;
+  }
+  .hero-tag {
+    max-width: 100%;
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    letter-spacing: 1.4px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-size: clamp(2.05rem, 11vw, 3rem);
+    line-height: 1.12;
+    margin-bottom: 18px;
+  }
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
   .hero-buttons { flex-direction: column; }
   .hero-buttons .btn { width: 100%; }
-  .hero-showcase { min-height: 360px; }
+  .hero-buttons {
+    gap: 12px;
+    margin-bottom: 34px;
+  }
+  .hero-cards {
+    gap: 14px;
+  }
+  .glass-card {
+    padding: 18px;
+    border-radius: 10px;
+  }
+  .hero-showcase {
+    order: 0;
+    min-height: 300px;
+    width: 100%;
+    overflow: hidden;
+  }
   .showcase-panel {
-    width: min(86vw, 360px);
+    width: min(82vw, 330px);
     padding: 12px;
     transform: none;
   }
   .showcase-screen {
-    min-height: 220px;
-    padding: 18px;
+    min-height: 190px;
+    grid-template-columns: 1fr 0.7fr;
+    gap: 12px;
+    padding: 16px;
+  }
+  .code-lines {
+    gap: 14px;
+  }
+  .growth-chart {
+    gap: 7px;
+    padding-top: 12px;
   }
   .showcase-chip {
-    padding: 11px 13px;
+    padding: 9px 11px;
+    border-radius: 10px;
+    gap: 7px;
   }
-  .chip-dev { left: 0; top: 8%; }
-  .chip-brand { right: 0; top: 18%; }
-  .chip-growth { left: 8%; bottom: 8%; }
+  .showcase-chip span {
+    font-size: 0.72rem;
+    letter-spacing: 0.8px;
+  }
+  .chip-dev { left: 2%; top: 5%; }
+  .chip-brand { right: 2%; top: 15%; }
+  .chip-growth { left: 7%; bottom: 6%; }
+  .showcase-ring {
+    width: min(76vw, 300px);
+  }
+  .orbit-one {
+    width: 82%;
+    height: 150px;
+  }
+  .orbit-two {
+    width: 66%;
+    height: 110px;
+  }
 
   .timeline::before { left: 20px; }
   .timeline-item { width: 100%; left: 0 !important; padding-left: 50px; padding-right: 0; text-align: left !important; }
@@ -2297,6 +2372,87 @@ ul {
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 0 18px;
+  }
+  .logo img {
+    height: 68px;
+  }
+  .hero {
+    padding: calc(var(--header-height) + 32px) 0 54px;
+  }
+  .hero-bg::before {
+    background-size: 46px 46px;
+    opacity: 0.34;
+  }
+  .hero-title {
+    font-size: clamp(1.86rem, 10vw, 2.35rem);
+  }
+  .hero-title br {
+    display: none;
+  }
+  .hero-subtitle {
+    margin-bottom: 24px;
+  }
+  .btn {
+    min-height: 48px;
+    padding: 12px 18px;
+    font-size: 0.82rem;
+  }
+  .hero-showcase {
+    min-height: 240px;
+    margin-top: 2px;
+  }
+  .showcase-panel {
+    width: min(90vw, 286px);
+    padding: 10px;
+    border-radius: 14px;
+  }
+  .showcase-toolbar {
+    padding-bottom: 10px;
+  }
+  .showcase-toolbar span {
+    width: 8px;
+    height: 8px;
+  }
+  .showcase-screen {
+    min-height: 150px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  .code-lines {
+    gap: 10px;
+  }
+  .code-lines span {
+    height: 8px;
+  }
+  .growth-chart span {
+    min-height: 28px;
+    border-radius: 6px 6px 0 0;
+  }
+  .showcase-chip {
+    padding: 8px 9px;
+  }
+  .showcase-chip i {
+    font-size: 0.82rem;
+  }
+  .showcase-chip span {
+    font-size: 0.66rem;
+  }
+  .chip-dev { left: 1%; top: 4%; }
+  .chip-brand { right: 1%; top: 12%; }
+  .chip-growth { left: 5%; bottom: 4%; }
+  .showcase-ring {
+    width: min(78vw, 250px);
+  }
+  .showcase-ring::before,
+  .showcase-ring::after {
+    width: 10px;
+    height: 10px;
+  }
+  .showcase-orbit {
+    display: none;
+  }
   .stats-grid { grid-template-columns: 1fr; }
   .business-areas { grid-template-columns: 1fr; }
   .testimonial-card { padding: 40px 24px; }
