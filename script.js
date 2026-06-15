@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoader();
   initNavigation();
   initTypingEffect();
-  initParticles();
   initCounters();
   initTestimonialSlider();
   initPortfolioFilter();
@@ -104,25 +103,6 @@ function initTypingEffect() {
   }
 
   type();
-}
-
-/* Floating Particles */
-function initParticles() {
-  const container = document.querySelector('.hero-particles');
-  if (!container) return;
-
-  for (let i = 0; i < 20; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    const size = Math.random() * 60 + 20;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.top = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 6 + 's';
-    particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-    container.appendChild(particle);
-  }
 }
 
 /* Animated Counters */
