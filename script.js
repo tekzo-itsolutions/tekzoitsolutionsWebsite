@@ -365,15 +365,53 @@ function showFormMessage(successMsg, errorMsg, type, text) {
   }
 }
 
+function getContactField(data, names) {
+  for (const name of names) {
+    const value = data.get(name);
+    if (value) return String(value).trim();
+  }
+  return '';
+}
+
+function buildContactInquiry(form) {
+  const data = new FormData(form);
+
+  return {
+    id: Date.now(),
+    name: getContactField(data, ['name', 'from_name']),
+    phone: getContactField(data, ['phone']),
+    email: getContactField(data, ['email', 'from_email']),
+    service: getContactField(data, ['service']) || 'General Inquiry',
+    message: getContactField(data, ['message']),
+    date: new Date().toLocaleDateString()
+  };
+}
+
+function saveContactInquiry(form) {
+  const inquiry = buildContactInquiry(form);
+  const raw = localStorage.getItem('tekzo_inquiries');
+  let list = [];
+
+  try {
+    list = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(list)) list = [];
+  } catch {
+    list = [];
+  }
+
+  list.unshift(inquiry);
+  localStorage.setItem('tekzo_inquiries', JSON.stringify(list));
+}
+
 function sendViaFormSubmit(form, config) {
   const data = new FormData(form);
   const payload = {
-    name: data.get('from_name'),
-    email: data.get('from_email'),
-    phone: data.get('phone'),
-    service: data.get('service'),
-    message: data.get('message'),
-    _subject: `Tekzo Contact: ${data.get('service') || 'New Inquiry'}`,
+    name: getContactField(data, ['name', 'from_name']),
+    email: getContactField(data, ['email', 'from_email']),
+    phone: getContactField(data, ['phone']),
+    service: getContactField(data, ['service']),
+    message: getContactField(data, ['message']),
+    _subject: `Tekzo Contact: ${getContactField(data, ['service']) || 'New Inquiry'}`,
     _template: 'table',
     _captcha: 'false'
   };
@@ -425,12 +463,15 @@ function initContactForm() {
     e.preventDefault();
 
     if (window.location.protocol === 'file:' && !useEmailJs) {
+      saveContactInquiry(form);
       showFormMessage(
         successMsg,
         errorMsg,
-        'error',
-        'Open this site through a local server (e.g. Live Server or "npx serve ."), not as a file on disk. FormSubmit does not work with file:// URLs.'
+        'success',
+        'Saved to the admin panel locally. Open this site through a local server to send the email also.'
       );
+      form.reset();
+      setTimeout(() => successMsg?.classList.remove('show'), 8000);
       return;
     }
 
@@ -445,6 +486,7 @@ function initContactForm() {
 
     sendPromise
       .then(() => {
+        saveContactInquiry(form);
         showFormMessage(
           successMsg,
           errorMsg,
