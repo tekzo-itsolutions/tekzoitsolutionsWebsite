@@ -45,43 +45,97 @@
 
   <section class="section contact-section">
     <div class="container">
-      <div class="contact-details" data-aos="fade-up">
-        <div class="contact-details-header">
-          <span class="section-tag">Contact Tekzo</span>
-          <h2>Get in Touch</h2>
-          <p class="contact-details-intro">Need a custom website, branding support, or social media help? Reach out and our team will get back to you quickly.</p>
-        </div>
-        <div class="contact-details-grid">
-          <div class="contact-detail-item">
-            <span class="contact-detail-icon"><i class="fas fa-phone-alt"></i></span>
+      <div class="contact-details-header" data-aos="fade-up" style="text-align: center; max-width: 720px; margin: 0 auto 60px;">
+        <span class="section-tag">Reach Out To Us</span>
+        <h2>Get in Touch</h2>
+        <p class="contact-details-intro">Have a project in mind, need branding support, or looking to boost your digital presence? Fill out the form below and our expert team will respond promptly.</p>
+      </div>
+
+      <div class="contact-wrapper">
+        <div class="contact-info-cards" data-aos="fade-right">
+          <div class="contact-info-card">
+            <div class="icon"><i class="fas fa-phone-alt"></i></div>
             <div>
-              <h4>Call Us</h4>
+              <h4>Call Us Direct</h4>
               <p><a href="tel:+919913290604">+91 99132 90604</a></p>
             </div>
           </div>
-          <div class="contact-detail-item">
-            <span class="contact-detail-icon"><i class="fas fa-envelope-open-text"></i></span>
+          <div class="contact-info-card">
+            <div class="icon"><i class="fas fa-envelope-open-text"></i></div>
             <div>
-              <h4>Email Us</h4>
+              <h4>Email Address</h4>
               <p><a href="mailto:tektoitsolutions@gmail.com">tektoitsolutions@gmail.com</a></p>
             </div>
           </div>
-          <div class="contact-detail-item">
-            <span class="contact-detail-icon"><i class="fas fa-map-marked-alt"></i></span>
+          <div class="contact-info-card">
+            <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
             <div>
-              <h4>Visit Us</h4>
+              <h4>Visit Office</h4>
               <p>Vapi, Gujarat, India</p>
             </div>
           </div>
-          <div class="contact-detail-item">
-            <span class="contact-detail-icon"><i class="fas fa-clock"></i></span>
+          <div class="contact-info-card">
+            <div class="icon"><i class="fas fa-clock"></i></div>
             <div>
-              <h4>Office Hours</h4>
+              <h4>Working Hours</h4>
               <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
               <p>Saturday: 10:00 AM - 2:00 PM</p>
             </div>
           </div>
         </div>
+
+        <div class="contact-form" data-aos="fade-left">
+          <h3 style="margin-bottom: 25px; font-weight: 800; font-size: 1.6rem;">Send Us a Message</h3>
+          <div class="form-success"></div>
+          <div class="form-error"></div>
+          <form id="contactForm" action="https://formsubmit.co/tektoitsolutions@gmail.com" method="POST">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" value="New Website Inquiry - Tekzo IT Solutions">
+            <input type="hidden" name="_autoresponse" value="Dear Valued Client, Thank you for contacting Tekzo IT Solutions! We have received your inquiry and our expert team will respond within 24 hours. Best Regards, Tekzo IT Solutions Team (tektoitsolutions@gmail.com)">
+            <input type="hidden" name="_next" id="form_next_url" value="">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="from_name">Full Name <span style="color: #e53e3e;">*</span></label>
+                <input type="text" id="from_name" name="name" placeholder="e.g. Rahul Sharma" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number <span style="color: #e53e3e;">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. +91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="from_email">Email Address <span style="color: #e53e3e;">*</span></label>
+              <input type="email" id="from_email" name="email" placeholder="e.g. name@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" name="service">
+                <option value="Web Development & Custom Website">Web Development & Custom Website</option>
+                <option value="Logo & UI/UX Design">Logo & UI/UX Design</option>
+                <option value="Branding & Identity Support">Branding & Identity Support</option>
+                <option value="Social Media Marketing">Social Media Marketing</option>
+                <option value="General Inquiry" selected>General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Project Details / Message <span style="color: #e53e3e;">*</span></label>
+              <textarea id="message" name="message" placeholder="Tell us about your project requirements, timeline, or questions..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section map-section" data-aos="fade-up">
+    <div class="container">
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119066.52982230402!2d72.85044439999999!3d20.3718591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0ce2b33c1626f%3A0xb2b4d952d4bf6895!2sVapi%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1718000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Tekzo IT Solutions Office Location Map"></iframe>
       </div>
     </div>
   </section>
