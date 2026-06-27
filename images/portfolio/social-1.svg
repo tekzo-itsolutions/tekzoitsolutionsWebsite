@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="linear-gradient(#833AB4,#FD1D1D,#F77737)"/>
-  <defs><linearGradient id="ig" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#833AB4"/><stop offset="50%" stop-color="#FD1D1D"/><stop offset="100%" stop-color="#F77737"/></linearGradient></defs>
-  <rect width="600" height="400" fill="url(#ig)"/>
-  <rect x="100" y="60" width="400" height="280" rx="12" fill="#000" opacity="0.3"/>
-  <rect x="130" y="100" width="340" height="200" rx="8" fill="#FFF" opacity="0.9"/>
-  <text x="300" y="200" text-anchor="middle" fill="#000" font-family="Arial" font-size="28" font-weight="bold">FOLLOW US</text>
-  <text x="300" y="370" text-anchor="middle" fill="#FFF" font-family="Arial" font-size="18">Instagram Campaign</text>
-</svg>

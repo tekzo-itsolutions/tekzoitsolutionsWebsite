@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-  <rect width="600" height="400" fill="#F5F5F5"/>
-  <rect x="200" y="40" width="200" height="360" rx="24" fill="#000"/>
-  <rect x="215" y="70" width="170" height="280" rx="4" fill="#1A1A1A"/>
-  <rect x="230" y="90" width="140" height="80" rx="8" fill="#333"/>
-  <rect x="230" y="190" width="60" height="60" rx="8" fill="#C0C0C0"/>
-  <rect x="310" y="190" width="60" height="60" rx="8" fill="#808080"/>
-  <text x="300" y="385" text-anchor="middle" fill="#000" font-family="Arial" font-size="18">Mobile App UI</text>
-</svg>
