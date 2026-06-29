@@ -12,6 +12,10 @@
 window.TEKZO_CONTACT = {
   method: 'formsubmit',
 
+  // Set sendToEnteredEmail to true if you want the mail to arrive in WHICHEVER email ID the user typed in the form!
+  // Set to false if you want all inquiries to go only to recipientEmail (tektoitsolutions@gmail.com).
+  sendToEnteredEmail: true,
+
   recipientEmail: 'tektoitsolutions@gmail.com',
 
   emailjs: {

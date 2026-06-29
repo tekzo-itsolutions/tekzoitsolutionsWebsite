@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initNewsletter();
   initAOS();
+  applyDynamicSettings();
 });
 
 /* Loading Screen */
@@ -365,55 +366,18 @@ function showFormMessage(successMsg, errorMsg, type, text) {
   }
 }
 
-function getContactField(data, names) {
-  for (const name of names) {
-    const value = data.get(name);
-    if (value) return String(value).trim();
-  }
-  return '';
-}
-
-function buildContactInquiry(form) {
-  const data = new FormData(form);
-
-  return {
-    id: Date.now(),
-    name: getContactField(data, ['name', 'from_name']),
-    phone: getContactField(data, ['phone']),
-    email: getContactField(data, ['email', 'from_email']),
-    service: getContactField(data, ['service']) || 'General Inquiry',
-    message: getContactField(data, ['message']),
-    date: new Date().toLocaleDateString()
-  };
-}
-
-function saveContactInquiry(form) {
-  const inquiry = buildContactInquiry(form);
-  const raw = localStorage.getItem('tekzo_inquiries');
-  let list = [];
-
-  try {
-    list = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(list)) list = [];
-  } catch {
-    list = [];
-  }
-
-  list.unshift(inquiry);
-  localStorage.setItem('tekzo_inquiries', JSON.stringify(list));
-}
-
 function sendViaFormSubmit(form, config) {
   const data = new FormData(form);
   const payload = {
-    name: getContactField(data, ['name', 'from_name']),
-    email: getContactField(data, ['email', 'from_email']),
-    phone: getContactField(data, ['phone']),
-    service: getContactField(data, ['service']),
-    message: getContactField(data, ['message']),
-    _subject: `Tekzo Contact: ${getContactField(data, ['service']) || 'New Inquiry'}`,
+    name: data.get('from_name'),
+    email: data.get('from_email'),
+    phone: data.get('phone'),
+    service: data.get('service'),
+    message: data.get('message'),
+    _subject: `Tekzo Contact: ${data.get('service') || 'New Inquiry'}`,
     _template: 'table',
-    _captcha: 'false'
+    _captcha: 'false',
+    _autoresponse: `Dear ${data.get('from_name') || 'Valued Client'},\n\nThank you for reaching out to Tekzo IT Solutions!\n\nWe have received your inquiry regarding "${data.get('service') || 'Digital Services'}". Our expert team will review your requirements and get back to you within 24 hours.\n\nYour Inquiry Summary:\n- Name: ${data.get('from_name')}\n- Phone: ${data.get('phone')}\n- Email: ${data.get('from_email')}\n- Service: ${data.get('service')}\n- Message: ${data.get('message')}\n\nBest Regards,\nTekzo IT Solutions Team\n🌐 https://tekzoitsolutions.com\n📞 +91 99132 90604\n📧 tektoitsolutions@gmail.com`
   };
 
   const email = (config.recipientEmail || '').trim();
@@ -456,64 +420,94 @@ function initContactForm() {
   const errorMsg = document.querySelector('.form-error');
   const config = getContactConfig();
 
+  // Check if visitor just redirected back after successful form submission!
+  if (window.location.search.includes('submitted=true') || window.location.search.includes('success=true')) {
+    showFormMessage(
+      successMsg,
+      errorMsg,
+      'success',
+      '🎉 Thank You! Your message has been successfully delivered. A confirmation email has been sent to your entered email address!'
+    );
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  const nextInput = document.getElementById('form_next_url');
+  if (nextInput) {
+    nextInput.value = window.location.origin + window.location.pathname + '?submitted=true';
+  }
+
   const useEmailJs =
     config.method === 'emailjs' && isEmailJsConfigured(config);
 
   form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if (window.location.protocol === 'file:' && !useEmailJs) {
-      saveContactInquiry(form);
-      showFormMessage(
-        successMsg,
-        errorMsg,
-        'success',
-        'Saved to the admin panel locally. Open this site through a local server to send the email also.'
-      );
-      form.reset();
-      setTimeout(() => successMsg?.classList.remove('show'), 8000);
-      return;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalHTML = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
     }
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
+    const emailInput = form.querySelector('input[name="email"]') || form.querySelector('input[name="from_email"]');
+    const userTypedEmail = emailInput ? emailInput.value.trim() : '';
+
+    // Save inquiry record into localStorage so Admin Panel gets it instantly!
+    try {
+      const nameVal = form.querySelector('input[name="name"]') || form.querySelector('input[name="from_name"]');
+      const phoneVal = form.querySelector('input[name="phone"]');
+      const serviceVal = form.querySelector('select[name="service"]');
+      const msgVal = form.querySelector('textarea[name="message"]');
+
+      const record = {
+        id: Date.now(),
+        name: nameVal ? nameVal.value.trim() : 'Anonymous Client',
+        phone: phoneVal ? phoneVal.value.trim() : 'N/A',
+        email: userTypedEmail || 'N/A',
+        service: serviceVal ? serviceVal.value : 'General Inquiry',
+        message: msgVal ? msgVal.value.trim() : '',
+        date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+      };
+      const existing = JSON.parse(localStorage.getItem('tekzo_inquiries') || '[]');
+      localStorage.setItem('tekzo_inquiries', JSON.stringify([record, ...existing]));
+    } catch (err) { console.warn('Could not sync local storage', err); }
+
+    // For default formsubmit method, let standard browser secure POST execute!
+    if (config.method !== 'emailjs' && config.method !== 'web3forms') {
+      const targetInbox = (config.sendToEnteredEmail && userTypedEmail.includes('@')) 
+        ? userTypedEmail 
+        : (config.recipientEmail || 'tektoitsolutions@gmail.com');
+
+      form.action = `https://formsubmit.co/${encodeURIComponent(targetInbox)}`;
+
+      if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
+        const nextInp = document.getElementById('form_next_url');
+        if (nextInp) nextInp.remove();
+      }
+
+      return; 
+    }
+
+    e.preventDefault();
+    if (submitBtn) submitBtn.disabled = true;
 
     const sendPromise = useEmailJs
       ? sendViaEmailJS(form, config)
       : sendViaFormSubmit(form, config);
 
     sendPromise
-      .then(() => {
-        saveContactInquiry(form);
-        showFormMessage(
-          successMsg,
-          errorMsg,
-          'success',
-          'Thank You! Your Message Has Been Successfully Sent.'
-        );
+      .then((res) => {
+        showFormMessage(successMsg, errorMsg, 'success', '🎉 Thank You! Your message has been sent successfully.');
         form.reset();
-        setTimeout(() => successMsg?.classList.remove('show'), 8000);
+        setTimeout(() => successMsg?.classList.remove('show'), 12000);
       })
       .catch((err) => {
         console.error('Contact form error:', err);
-        let message = 'Something went wrong. Please try again or email us directly.';
-
-        if (!useEmailJs && config.method === 'emailjs') {
-          message =
-            'EmailJS is not configured. Open assets/contact-config.js and add your keys, or set method to "formsubmit".';
-        } else if (err?.text) {
-          message = `Could not send: ${err.text}`;
-        } else if (err?.message) {
-          message = err.message;
-        }
-
-        showFormMessage(successMsg, errorMsg, 'error', message);
+        showFormMessage(successMsg, errorMsg, 'error', 'Could not send via AJAX. Submitting form securely via direct server connection...');
+        form.submit();
       })
       .finally(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+          submitBtn.innerHTML = originalHTML;
+          submitBtn.disabled = false;
+        }
       });
   });
 }
@@ -526,7 +520,12 @@ function initNewsletter() {
       e.preventDefault();
       const input = form.querySelector('input');
       if (input && input.value) {
-        alert('Thank you for subscribing to our newsletter!');
+        try {
+          const subs = JSON.parse(localStorage.getItem('tekzo_subscribers') || '[]');
+          subs.unshift({ email: input.value.trim(), date: new Date().toLocaleDateString() });
+          localStorage.setItem('tekzo_subscribers', JSON.stringify(subs));
+        } catch {}
+        alert('🎉 Thank you for subscribing to our newsletter!');
         input.value = '';
       }
     });
@@ -543,6 +542,28 @@ function initAOS() {
       offset: 80
     });
   }
+}
+
+/* Dynamic Site Settings Applier */
+function applyDynamicSettings() {
+  try {
+    const raw = localStorage.getItem('tekzo_settings');
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    
+    if (s.phone) {
+      document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+        a.href = 'tel:' + s.phone.replace(/[^0-9+]/g, '');
+        a.textContent = s.phone;
+      });
+    }
+    if (s.email) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+        a.href = 'mailto:' + s.email;
+        a.textContent = s.email;
+      });
+    }
+  } catch {}
 }
 
 /* Fade In Animation for Portfolio */

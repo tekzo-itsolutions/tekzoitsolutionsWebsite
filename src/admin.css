@@ -92,14 +92,14 @@ a {
 .login-logo {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, #fff, #9ca3af);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  gap: 10px;
   margin-bottom: 12px;
+}
+
+.login-logo img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
 }
 
 .login-logo .badge {
@@ -123,11 +123,11 @@ a {
   font-size: 0.9rem;
 }
 
-.form-group {
+.form-group-admin {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group-admin label {
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
@@ -165,6 +165,7 @@ a {
   outline: none;
   border-color: var(--admin-primary);
   box-shadow: 0 0 0 3px var(--admin-primary-glow);
+  color: #000;
 }
 
 .btn-toggle-pass {
