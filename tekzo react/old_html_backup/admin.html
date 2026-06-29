@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Tekzo IT Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <div class="login-logo" style="margin-bottom: 0;">
+          <img src="logo/tekzo logo img.png" alt="Tekzo IT Solutions Logo">
+          <span class="badge">PANEL</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="menu-item active" onclick="switchTab('overview')">
+          <i class="fas fa-chart-pie icon"></i>
+          <span>Overview</span>
+        </button>
+        <button class="menu-item" onclick="switchTab('inquiries')">
+          <i class="fas fa-inbox icon"></i>
+          <span>Client Inquiries</span>
+        </button>
+        <button class="menu-item" onclick="switchTab('settings')">
+          <i class="fas fa-sliders-h icon"></i>
+          <span>Dynamic Site Editor</span>
+        </button>
+        <button class="menu-item" onclick="switchTab('subscribers')">
+          <i class="fas fa-envelope-open-text icon"></i>
+          <span>Newsletter Leads</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-logout" onclick="logoutAdmin()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout Session</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <h1 id="pageTitle">Control Dashboard Overview</h1>
+        </div>
+
+        <div class="topbar-right">
+          <a href="index.html" target="_blank" class="btn-view-site">
+            <i class="fas fa-external-link-alt"></i>
+            <span>Preview Live Site</span>
+          </a>
+
+          <div class="admin-profile">
+            <div class="avatar">A</div>
+            <div>
+              <p style="font-size: 0.9rem; font-weight: 700;">Administrator</p>
+              <p style="font-size: 0.75rem; color: var(--admin-success);">● Online Session</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+
+        <!-- TAB 1: Overview -->
+        <div id="tab-overview" class="tab-pane active">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Total Client Inquiries</h3>
+                <div class="stat-val" id="statInquiries">0</div>
+              </div>
+              <div class="stat-icon icon-purple"><i class="fas fa-paper-plane"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Newsletter Subscribers</h3>
+                <div class="stat-val" id="statSubscribers">0</div>
+              </div>
+              <div class="stat-icon icon-cyan"><i class="fas fa-users"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Active Agency Services</h3>
+                <div class="stat-val">5</div>
+              </div>
+              <div class="stat-icon icon-green"><i class="fas fa-briefcase"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <h3>Server Status</h3>
+                <div class="stat-val" style="font-size: 1.4rem; color: var(--admin-success);">Active</div>
+              </div>
+              <div class="stat-icon icon-amber"><i class="fas fa-server"></i></div>
+            </div>
+          </div>
+
+          <!-- Quick Preview of Recent Inquiries -->
+          <div class="card-box">
+            <div class="card-box-header">
+              <h2>Recent Submissions</h2>
+              <button class="btn-sm btn-export" onclick="switchTab('inquiries')">View All Submissions <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Client Name</th>
+                    <th>Email Address</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewTableBody">
+                  <!-- Inserted dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Inquiries -->
+        <div id="tab-inquiries" class="tab-pane">
+          <div class="card-box">
+            <div class="card-box-header">
+              <h2>All Contact Us Submissions</h2>
+              <div class="table-actions">
+                <input type="text" class="search-input" id="searchInquiries" placeholder="Search name or email..." oninput="filterInquiries()">
+                <button class="btn-sm btn-export" onclick="exportToCSV('inquiries')"><i class="fas fa-download"></i> Export CSV</button>
+                <button class="btn-sm btn-danger-sm" onclick="clearAllInquiries()"><i class="fas fa-trash"></i> Clear All</button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Service</th>
+                    <th>Submitted Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiriesTableBody">
+                  <!-- Inserted dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Dynamic Settings Editor -->
+        <div id="tab-settings" class="tab-pane">
+          <div class="card-box">
+            <div class="card-box-header">
+              <h2>Dynamic Website Settings Manager</h2>
+            </div>
+            <p style="color: var(--admin-muted); margin-bottom: 25px;">Changes saved here will reflect live on the public website immediately.</p>
+
+            <form id="dynamicSettingsForm" onsubmit="saveSiteSettings(event)">
+              <div class="settings-grid">
+                <div>
+                  <h3 style="margin-bottom: 15px; color: var(--admin-accent);">📞 Contact Details</h3>
+                  <div class="form-group">
+                    <label>Company Phone Number</label>
+                    <input type="text" class="form-control" id="setPhone" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Company Email Address</label>
+                    <input type="email" class="form-control" id="setEmail" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Office Location Address</label>
+                    <input type="text" class="form-control" id="setAddress" required>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 style="margin-bottom: 15px; color: var(--admin-accent);">🕒 Working Hours</h3>
+                  <div class="form-group">
+                    <label>Weekdays (Mon - Fri)</label>
+                    <input type="text" class="form-control" id="setHoursWeek" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Saturday</label>
+                    <input type="text" class="form-control" id="setHoursSat" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Hero Title Tag</label>
+                    <input type="text" class="form-control" id="setHeroTitle" placeholder="e.g. Innovate. Transform. Accelerate.">
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 25px; border-top: 1px solid var(--admin-border); padding-top: 20px; display: flex; gap: 15px;">
+                <button type="submit" class="btn-sm btn-export" style="background: var(--admin-primary); padding: 12px 24px; font-size: 1rem;">Save Changes to Live Website</button>
+                <button type="button" class="btn-sm btn-danger-sm" onclick="resetDefaultSettings()">Reset Defaults</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB 4: Newsletter Subscribers -->
+        <div id="tab-subscribers" class="tab-pane">
+          <div class="card-box">
+            <div class="card-box-header">
+              <h2>Footer Newsletter Subscribers</h2>
+              <button class="btn-sm btn-danger-sm" onclick="clearSubscribers()"><i class="fas fa-trash"></i> Clear List</button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Subscriber Email</th>
+                    <th>Subscribed Date</th>
+                  </tr>
+                </thead>
+                <tbody id="subscribersTableBody">
+                  <!-- Inserted dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Inquiry View Modal -->
+  <div class="modal-backdrop" id="inquiryModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalClientName">Client Inquiry</h3>
+        <button class="btn-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body" id="modalBodyContent">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
