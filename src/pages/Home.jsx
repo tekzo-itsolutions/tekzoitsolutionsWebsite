@@ -83,7 +83,7 @@ const Home = () => {
         <Particles count={20} />
         <div className="container">
           <div className="hero-content" data-aos="fade-up">
-            <span className="hero-tag">Welcome to Tekzo IT Solutions</span>
+            <span className="hero-tag">Welcome to Tekzo IT Solution</span>
             <h1 className="hero-title">
               Transforming Ideas Into<br />
               <span className="typing-text" ref={typingRef}>Digital Solutions</span>

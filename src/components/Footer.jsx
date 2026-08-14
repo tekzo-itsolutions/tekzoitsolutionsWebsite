@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <img src="/logo/tekzo logo img.png" alt="Tekzo IT Solutions" />
+            <img src="public/images/tekzo logo 12.png" alt="Tekzo IT Solution" />
             <p>
               Transforming ideas into powerful digital solutions. Your trusted partner for web
               development, design, and social media excellence.
@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2026 Tekzo IT Solutions. All Rights Reserved.</p>
+          <p>&copy; 2026 Tekzo IT Solution. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
