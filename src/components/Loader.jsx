@@ -18,7 +18,7 @@ const Loader = () => {
 
   return (
     <div className={`loader ${isHidden ? 'hidden' : ''}`}>
-      <img src="public/images/tekzo logo 12.png" alt="Tekzo IT Solutions" className="loader-logo" />
+      <img src="/images/tekzo logo 12.png" alt="Tekzo IT Solutions" className="loader-logo" />
       <div className="loader-bar">
         <div className="loader-progress"></div>
       </div>

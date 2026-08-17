@@ -29,7 +29,7 @@ const Header = () => {
       <div className="container">
         <nav className="nav">
           <Link to="/" className="logo" onClick={closeMenu}>
-            <img src="public/images/tekzo logo 12.png" alt="Tekzo IT Solutions Logo" />
+            <img src="/images/tekzo logo 12.png" alt="Tekzo IT Solutions Logo" />
           </Link>
           <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
             <li>
