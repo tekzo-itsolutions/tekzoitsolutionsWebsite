@@ -39,64 +39,7 @@ const VisionMission = () => {
         </div>
       </section>
 
-      <section className="section section-light">
-        <div className="container">
-          <div className="section-header" data-aos="fade-up">
-            <span className="section-tag">Roadmap</span>
-            <h2 className="section-title">Future Goals</h2>
-            <p className="section-subtitle">
-              Our strategic milestones for sustainable growth and innovation
-            </p>
-          </div>
-          <div className="timeline">
-            <div className="timeline-item" data-aos="fade-right">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="timeline-year">2026</div>
-                <h4>Expand Service Portfolio</h4>
-                <p>Launch advanced AI-powered web solutions and mobile app development services.</p>
-              </div>
-            </div>
-            <div className="timeline-item" data-aos="fade-left">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="timeline-year">2027</div>
-                <h4>Global Client Base</h4>
-                <p>Establish partnerships with international clients across 10+ countries worldwide.</p>
-              </div>
-            </div>
-            <div className="timeline-item" data-aos="fade-right">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="timeline-year">2028</div>
-                <h4>Team Expansion</h4>
-                <p>
-                  Grow our team to 50+ skilled professionals across development, design, and marketing.
-                </p>
-              </div>
-            </div>
-            <div className="timeline-item" data-aos="fade-left">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="timeline-year">2029</div>
-                <h4>Industry Leadership</h4>
-                <p>Become a recognized leader in digital transformation consulting and solutions.</p>
-              </div>
-            </div>
-            <div className="timeline-item" data-aos="fade-right">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="timeline-year">2030</div>
-                <h4>Innovation Hub</h4>
-                <p>
-                  Establish an innovation lab for R&D in emerging technologies and digital trends.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+  
       <section className="section section-gradient">
         <div className="container">
           <div className="section-header" data-aos="fade-up">
